@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新游测试周报看板（2026-02-09～2026-02-14）</title>
+    <meta name="description" content="2月9日至2月14期间新游：周报与可视化看板（GitHub Pages）" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="side" aria-label="侧边栏">
+        <div class="side__brand">
+          <div class="side__logo" aria-hidden="true">GM</div>
+          <div class="side__name" id="brandTitle">新游测试周报</div>
+        </div>
+        <nav class="side__nav" aria-label="导航">
+          <button class="navItem is-active" data-tab="home" type="button">首页</button>
+          <button class="navItem" data-tab="rank" type="button">榜单焦点</button>
+          <button class="navItem" data-tab="tests" type="button">测试流</button>
+          <button class="navItem" data-tab="report" type="button">周报</button>
+        </nav>
+        <div class="side__foot" id="footerMeta">加载中…</div>
+      </aside>
+
+      <div class="content">
+        <header class="topbar" aria-label="顶部栏">
+          <div class="topbar__left">
+            <div class="crumb" id="brandSub">加载中…</div>
+          </div>
+          <div class="topbar__center">
+            <div class="search">
+              <input id="globalSearch" class="search__input" type="search" placeholder="搜索：游戏名 / 厂商 / 品类 / 备注…" />
+              <button id="globalSearchBtn" class="search__btn" type="button">搜索</button>
+            </div>
+          </div>
+          <div class="topbar__right">
+            <button class="pillBtn" id="goReport" type="button">打开周报</button>
+          </div>
+        </header>
+
+        <main class="mainTap" aria-label="主内容">
+          <section id="home" class="panel is-active" aria-label="首页">
+            <section class="hero cardTap" aria-label="推荐">
+              <div class="hero__media" id="heroMedia"></div>
+              <div class="hero__body">
+                <div class="hero__title" id="heroTitle">加载中…</div>
+                <div class="hero__meta" id="heroMeta">-</div>
+                <div class="hero__kpis">
+                  <div class="kpiMini"><div class="kpiMini__k" id="kpiTestCount">-</div><div class="kpiMini__v">本周测试</div></div>
+                  <div class="kpiMini"><div class="kpiMini__k" id="kpiRankCount">-</div><div class="kpiMini__v">榜单焦点</div></div>
+                  <div class="kpiMini"><div class="kpiMini__k" id="kpiWatchCount">-</div><div class="kpiMini__v">风向标</div></div>
+                  <div class="kpiMini"><div class="kpiMini__k" id="kpiCompanyCount">-</div><div class="kpiMini__v">厂商</div></div>
+                </div>
+              </div>
+            </section>
+
+            <div class="gridTap">
+              <section class="feed" aria-label="推荐信息流">
+                <div class="sectionHead">
+                  <div>
+                    <div class="sectionHead__t">推荐</div>
+                    <div class="sectionHead__s" id="feedSub">按本周记录生成的信息流</div>
+                  </div>
+                  <div class="filterRow">
+                    <select id="filterType" class="selectTap" aria-label="按测试类型筛选">
+                      <option value="">全部类型</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="feedList" id="feedList"></div>
+              </section>
+
+              <aside class="right" aria-label="右侧栏">
+                <section class="cardTap">
+                  <div class="cardTap__title">热门关注</div>
+                  <div class="hotList" id="hotList"></div>
+                </section>
+                <section class="cardTap">
+                  <div class="cardTap__title">市场风向标</div>
+                  <div class="windListTap" id="windList"></div>
+                </section>
+              </aside>
+            </div>
+          </section>
+
+          <section id="rank" class="panel" aria-label="榜单焦点">
+            <div class="cardTap pad">
+              <div class="cardTap__title">榜单异动 / 新上畅销</div>
+              <div class="focusGridTap" id="focusCards"></div>
+            </div>
+          </section>
+
+          <section id="tests" class="panel" aria-label="测试流">
+            <div class="cardTap pad">
+              <div class="cardTap__title">近期测试新游（表格 + 展开详情）</div>
+              <div class="controlsTap">
+                <input id="filterText" class="inputTap" type="search" placeholder="搜索：游戏名 / 厂商 / 品类 / 备注…" />
+                <div class="seg" role="group" aria-label="视图切换">
+                  <button class="seg__btn is-active" id="viewTable" type="button">表格</button>
+                  <button class="seg__btn" id="viewCards" type="button">卡片</button>
+                </div>
+              </div>
+              <div class="tableWrap" id="testsTableWrap" aria-label="测试列表表格">
+                <table class="table" id="testsTable">
+                  <thead>
+                    <tr>
+                      <th style="width: 76px">评级</th>
+                      <th>游戏</th>
+                      <th style="width: 92px">状态</th>
+                      <th style="width: 150px">类型/题材</th>
+                      <th style="width: 240px">厂商信息</th>
+                      <th>推荐理由</th>
+                      <th style="width: 72px">详情</th>
+                    </tr>
+                  </thead>
+                  <tbody id="testsTableBody"></tbody>
+                </table>
+              </div>
+              <div class="cardsWrap is-hidden" id="testsCardsWrap" aria-label="测试列表卡片"></div>
+            </div>
+          </section>
+
+          <section id="report" class="panel" aria-label="周报">
+            <div class="cardTap pad">
+              <div class="cardTap__title">周报（Markdown 渲染）</div>
+              <div class="report__meta" id="reportMeta">加载中…</div>
+              <article class="report__content markdown" id="reportContent"></article>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
